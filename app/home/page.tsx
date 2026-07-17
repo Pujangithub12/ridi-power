@@ -50,28 +50,28 @@ const features = [
   {
     icon: Droplets,
     title: "Run-of-River Systems",
-    bgIcon: "bg-sky-900 text-cyan-400 border border-sky-800",
+    bgIcon: "bg-sky-900 text-white border border-sky-800",
     description:
       "Environmentally friendly hydroelectric systems that harness natural river flow without large reservoirs, minimizing ecological impact.",
   },
   {
     icon: Shield,
     title: "Reservoir Hydropower",
-    bgIcon: "bg-sky-900 text-cyan-400 border border-sky-800",
+    bgIcon: "bg-sky-900 text-white border border-sky-800",
     description:
       "Large-scale reservoir projects providing reliable baseload power with water storage capabilities for grid stability and flood control.",
   },
   {
     icon: TrendingUp,
     title: "Pumped Storage",
-    bgIcon: "bg-sky-900 text-cyan-400 border border-sky-800",
+    bgIcon: "bg-sky-900 text-white border border-sky-800",
     description:
       "Advanced energy storage solutions that pump water uphill during low demand and generate electricity during peak hours.",
   },
   {
     icon: Globe,
     title: "Global Reach",
-    bgIcon: "bg-sky-900 text-cyan-400 border border-sky-800",
+    bgIcon: "bg-sky-900 text-white border border-sky-800",
     description:
       "Operating across multiple continents with projects in North America, Europe, Asia, and South America, adapting to diverse environments.",
   },
@@ -148,7 +148,7 @@ export default function HomePage() {
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full z-10 pt-12">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-400/30 text-cyan-400 text-xs font-bold uppercase tracking-widest font-mono mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-400/30 text-white text-xs font-bold uppercase tracking-widest font-mono mb-8 backdrop-blur-sm">
               <Zap className="w-3.5 h-3.5 animate-pulse" />
               Infrastructure Systems
             </div>
@@ -189,7 +189,7 @@ export default function HomePage() {
       
 
       {/* Features Section - Dotted Grid Technical Matrix */}
-      <section className="py-32 relative overflow-hidden bg-white mt-4">
+      <section className="py-24 relative overflow-hidden bg-white mt-4">
         <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-50 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mb-20">
@@ -234,7 +234,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Projects - Editorial Card Pipeline */}
-      <section className="py-32 bg-slate-50 border-y border-slate-200/70">
+      <section className="py-24 bg-slate-50 border-y border-slate-200/70">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-20 gap-6">
             <div className="max-w-xl">
@@ -314,7 +314,7 @@ export default function HomePage() {
       </section>
 
       {/* Stakeholder Endorsements - Premium Structured Layout */}
-      <section className="py-32 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center mb-20">
             <span className="text-xs font-bold uppercase tracking-widest text-cyan-600 font-mono block mb-3">
@@ -363,7 +363,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Block - Premium Structural Box */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200/60">
+      <section className="py-20 bg-slate-50 border-t border-slate-200/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="relative rounded-2xl bg-sky-900 text-white border border-sky-800 p-12 md:p-20 overflow-hidden shadow-2xl shadow-sky-900/20">
             <div className="absolute inset-0 bg-[radial-gradient(#0e1e38_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />

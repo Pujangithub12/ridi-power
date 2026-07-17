@@ -9,7 +9,7 @@ export default async function QuarterlyFinancialStatementsPage() {
   try {
     documents = await listFinancialDocuments("quarterly");
   } catch {
-    error = "Documents are temporarily unavailable.";
+    error = "No documents available yet.";
   }
 
   return (

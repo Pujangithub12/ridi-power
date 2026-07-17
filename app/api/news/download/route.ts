@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDownloadUrl, keyBelongsToKnownCategory } from "@/lib/r2";
+import { getNewsDocumentDownloadUrl, isKnownNewsDocumentKey } from "@/lib/news";
 
 export async function GET(request: NextRequest) {
   const key = request.nextUrl.searchParams.get("key");
-  if (!key || key.includes("..") || !keyBelongsToKnownCategory(key)) {
+  const title = request.nextUrl.searchParams.get("title") ?? "document";
+
+  if (!key || key.includes("..") || !isKnownNewsDocumentKey(key)) {
     return NextResponse.json({ error: "Invalid key" }, { status: 400 });
   }
 
   try {
-    const url = await getDownloadUrl(key);
+    const url = await getNewsDocumentDownloadUrl(key, title);
     return NextResponse.redirect(url);
   } catch (error) {
     console.error("Failed to generate download link", error);

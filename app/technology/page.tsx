@@ -11,8 +11,6 @@ import {
   Battery,
   Waves,
   Cog,
-  Microscope,
-  FileText,
 } from "lucide-react";
 
 const technologies = [
@@ -40,7 +38,7 @@ const technologies = [
     icon: Cog,
     title: "Pelton Wheels",
     imageSrc:
-      "https://images.unsplash.com/photo-1537462715879-360eeb61a0bc?w=800&h=500&fit=crop",
+      "https://upload.wikimedia.org/wikipedia/commons/f/fb/PeltonWheel.jpg",
     description:
       "High-head impulse systems designed for rugged topography. Optimized specifically for complex high-velocity run-of-river installations.",
     specs: ["Efficiency: 91%", "Head Range: 200-1800m", "Capacity: 1-50 MW"],
@@ -89,39 +87,6 @@ const innovations = [
   },
 ];
 
-const researchPapers = [
-  {
-    title: "Advanced Fish Passage Design in Low-Head Hydropower Ecosystems",
-    authors: "Thornton, J., et al.",
-    journal: "Renewable Energy Journal",
-    year: "2024",
-    impact: "Cited 45 times",
-  },
-  {
-    title:
-      "Machine Learning Multi-Variant Modeling in Hydro Turbine Kinetic Optimization",
-    authors: "Chen, M., Vasquez, E.",
-    journal: "IEEE Transactions on Energy Systems",
-    year: "2023",
-    impact: "Cited 78 times",
-  },
-  {
-    title: "Climate Resilience Indices in Megawatt Infrastructure Planning",
-    authors: "Patel, A., et al.",
-    journal: "Nature Climate Change",
-    year: "2023",
-    impact: "Cited 112 times",
-  },
-  {
-    title:
-      "Pumped Storage Synchronous Kondensator Deployment for Grid Stabilization",
-    authors: "Ridi Engineering Systems Core Team",
-    journal: "Energy Storage Materials",
-    year: "2024",
-    impact: "Cited 34 times",
-  },
-];
-
 export default function TechnologyPage() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pt-20">
@@ -134,42 +99,15 @@ export default function TechnologyPage() {
           Our Technology
         </h1>
         <p className="text-base md:text-lg text-slate-500 leading-relaxed max-w-2xl">
-          Pioneering the synthesis of baseline renewable power through
-          advanced fluid mechanics, autonomous optimization, and continuous
-          material science research.
+           We spec and deploy bespoke variable geometry turbine hardware
+            tailored precisely to regional water discharge velocity
+            profiles.
         </p>
-      </section>
-
-      {/* Hero Image */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
-        <div className="relative w-full h-[32vh] min-h-[240px] bg-slate-200 rounded-3xl overflow-hidden shadow-lg">
-          <Image
-            src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&h=800&fit=crop"
-            alt="Hydropower digital infrastructure core"
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-          />
-        </div>
       </section>
 
       {/* Turbine Systems */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-2xl mb-10">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-3">
-              Kinetic Energy Conversion
-            </span>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900">
-              Turbine Systems & Configurations
-            </h2>
-            <p className="text-sm text-slate-500 mt-3 leading-relaxed max-w-xl">
-              We spec and deploy bespoke variable geometry turbine hardware
-              tailored precisely to regional water discharge velocity
-              profiles.
-            </p>
-          </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {technologies.map((tech, index) => (
@@ -271,45 +209,6 @@ export default function TechnologyPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Research & Publications */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-2xl mb-10">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold mb-3">
-              <Microscope className="w-3.5 h-3.5" strokeWidth={2} />
-              Research & Development
-            </span>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900">
-              Publications & Research Papers
-            </h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-5">
-            {researchPapers.map((paper, index) => (
-              <div
-                key={index}
-                className="p-6 rounded-2xl bg-slate-50 hover:shadow-lg transition-all duration-300 flex gap-4"
-              >
-                <div className="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-white shadow-md">
-                  <FileText className="w-4.5 h-4.5" strokeWidth={2} />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold tracking-tight text-slate-900 mb-2 leading-snug">
-                    {paper.title}
-                  </h3>
-                  <p className="text-xs text-slate-500 mb-3">
-                    {paper.authors} · {paper.journal} · {paper.year}
-                  </p>
-                  <span className="inline-block px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-bold">
-                    {paper.impact}
-                  </span>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

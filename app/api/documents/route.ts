@@ -12,11 +12,6 @@ function isCategory(value: unknown): value is DocumentCategory {
   return typeof value === "string" && CATEGORIES.has(value);
 }
 
-function sanitizeFileName(name: string): string {
-  const cleaned = name.replace(/[^a-zA-Z0-9._-]/g, "_");
-  return cleaned.slice(-150) || "document.pdf";
-}
-
 export async function GET(request: NextRequest) {
   const category = request.nextUrl.searchParams.get("category");
   if (!isCategory(category)) {
@@ -47,6 +42,7 @@ export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const category = formData.get("category");
   const password = formData.get("password");
+  const title = formData.get("title");
   const file = formData.get("file");
 
   if (!isCategory(category)) {
@@ -55,6 +51,17 @@ export async function POST(request: NextRequest) {
 
   if (typeof password !== "string" || password !== expectedPassword) {
     return NextResponse.json({ error: "Incorrect password" }, { status: 401 });
+  }
+
+  const trimmedTitle = typeof title === "string" ? title.trim() : "";
+  if (!trimmedTitle) {
+    return NextResponse.json({ error: "Title is required" }, { status: 400 });
+  }
+  if (trimmedTitle.length > 150) {
+    return NextResponse.json(
+      { error: "Title must be 150 characters or fewer" },
+      { status: 400 }
+    );
   }
 
   if (!(file instanceof File)) {
@@ -75,11 +82,10 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const fileName = `${Date.now()}-${sanitizeFileName(file.name)}`;
   const buffer = Buffer.from(await file.arrayBuffer());
 
   try {
-    await uploadFinancialDocument(category, fileName, buffer, file.type);
+    await uploadFinancialDocument(category, trimmedTitle, buffer, file.type);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Failed to upload financial document", error);

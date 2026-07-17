@@ -107,15 +107,15 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-cyan-400 shrink-0" strokeWidth={2} />
+                <Mail className="w-4 h-4 text-white shrink-0" strokeWidth={2} />
                 <span>info@ridihydropower.com</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-cyan-400 shrink-0" strokeWidth={2} />
+                <Phone className="w-4 h-4 text-white shrink-0" strokeWidth={2} />
                 <span>+1 (503) 555-0123</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-cyan-400 shrink-0" strokeWidth={2} />
+                <MapPin className="w-4 h-4 text-white shrink-0" strokeWidth={2} />
                 <span>Trade Tower, Thapathali, Kathmandu</span>
               </li>
             </ul>

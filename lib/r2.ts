@@ -1,10 +1,10 @@
 import {
-  S3Client,
   PutObjectCommand,
   ListObjectsV2Command,
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { getR2Client, getR2Bucket, publicUrlFor } from "./r2-client";
 
 export type DocumentCategory = "annual" | "quarterly";
 
@@ -15,77 +15,79 @@ export type FinancialDocument = {
   uploadedAt: string;
 };
 
-let client: S3Client | null = null;
-
-function getClient(): S3Client {
-  if (client) return client;
-
-  const accountId = process.env.R2_ACCOUNT_ID;
-  const accessKeyId = process.env.R2_ACCESS_KEY_ID;
-  const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
-
-  if (!accountId || !accessKeyId || !secretAccessKey) {
-    throw new Error(
-      "Missing Cloudflare R2 credentials. Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, and R2_SECRET_ACCESS_KEY."
-    );
-  }
-
-  client = new S3Client({
-    region: "auto",
-    endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
-    credentials: { accessKeyId, secretAccessKey },
-  });
-  return client;
-}
-
-function getBucket(): string {
-  const bucket = process.env.R2_BUCKET_NAME;
-  if (!bucket) {
-    throw new Error("Missing R2_BUCKET_NAME environment variable.");
-  }
-  return bucket;
-}
+const CATEGORIES: DocumentCategory[] = ["annual", "quarterly"];
 
 function prefixFor(category: DocumentCategory): string {
   return `financial-statements/${category}/`;
 }
 
-export function keyBelongsToCategory(
-  key: string,
-  category: DocumentCategory
-): boolean {
-  return key.startsWith(prefixFor(category));
+/**
+ * Keys are shaped `financial-statements/{category}/{timestamp}/{encoded title}.pdf`.
+ * The title lives in the key (not S3 object metadata) so listing needs a single
+ * ListObjectsV2 call instead of a HeadObject per document.
+ */
+function parseKey(
+  key: string
+): { category: DocumentCategory; title: string } | null {
+  for (const category of CATEGORIES) {
+    const prefix = prefixFor(category);
+    if (!key.startsWith(prefix)) continue;
+
+    const rest = key.slice(prefix.length); // "{timestamp}/{encoded title}.pdf"
+    const slashIndex = rest.indexOf("/");
+    if (slashIndex === -1) return { category, title: rest };
+
+    const encodedTitleWithExt = rest.slice(slashIndex + 1);
+    const encodedTitle = encodedTitleWithExt.replace(/\.pdf$/i, "");
+    let title = encodedTitleWithExt;
+    try {
+      title = decodeURIComponent(encodedTitle) || encodedTitleWithExt;
+    } catch {
+      // Malformed encoding — fall back to the raw segment.
+    }
+    return { category, title };
+  }
+  return null;
+}
+
+export function keyBelongsToKnownCategory(key: string): boolean {
+  return parseKey(key) !== null;
 }
 
 export async function listFinancialDocuments(
   category: DocumentCategory
 ): Promise<FinancialDocument[]> {
   const prefix = prefixFor(category);
-  const result = await getClient().send(
-    new ListObjectsV2Command({ Bucket: getBucket(), Prefix: prefix })
+  const result = await getR2Client().send(
+    new ListObjectsV2Command({ Bucket: getR2Bucket(), Prefix: prefix })
   );
 
   return (result.Contents ?? [])
     .filter((obj) => obj.Key && obj.Key !== prefix)
-    .map((obj) => ({
-      key: obj.Key!,
-      name: obj.Key!.slice(prefix.length),
-      size: obj.Size ?? 0,
-      uploadedAt: obj.LastModified?.toISOString() ?? "",
-    }))
+    .map((obj) => {
+      const parsed = parseKey(obj.Key!);
+      return {
+        key: obj.Key!,
+        name: parsed?.title ?? obj.Key!.slice(prefix.length),
+        size: obj.Size ?? 0,
+        uploadedAt: obj.LastModified?.toISOString() ?? "",
+      };
+    })
     .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 }
 
 export async function uploadFinancialDocument(
   category: DocumentCategory,
-  fileName: string,
+  title: string,
   body: Buffer,
   contentType: string
 ): Promise<string> {
-  const key = `${prefixFor(category)}${fileName}`;
-  await getClient().send(
+  const key = `${prefixFor(category)}${Date.now()}/${encodeURIComponent(
+    title
+  )}.pdf`;
+  await getR2Client().send(
     new PutObjectCommand({
-      Bucket: getBucket(),
+      Bucket: getR2Bucket(),
       Key: key,
       Body: body,
       ContentType: contentType,
@@ -95,11 +97,18 @@ export async function uploadFinancialDocument(
 }
 
 export async function getDownloadUrl(key: string): Promise<string> {
-  const publicBase = process.env.R2_PUBLIC_URL;
-  if (publicBase) {
-    return `${publicBase.replace(/\/$/, "")}/${key}`;
-  }
+  const parsed = parseKey(key);
+  const disposition = parsed
+    ? `attachment; filename="${parsed.title.replace(/["\\]/g, "")}.pdf"`
+    : undefined;
 
-  const command = new GetObjectCommand({ Bucket: getBucket(), Key: key });
-  return getSignedUrl(getClient(), command, { expiresIn: 600 });
+  const publicUrl = publicUrlFor(key);
+  if (publicUrl) return publicUrl;
+
+  const command = new GetObjectCommand({
+    Bucket: getR2Bucket(),
+    Key: key,
+    ResponseContentDisposition: disposition,
+  });
+  return getSignedUrl(getR2Client(), command, { expiresIn: 600 });
 }

@@ -125,7 +125,7 @@ export default function ContactPage() {
                 key={index}
                 className="p-6 rounded-xl bg-white border border-slate-200/60 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-sky-900/5 transition-all duration-300 group"
               >
-                <div className="w-10 h-10 rounded-lg bg-sky-900 border border-sky-800 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-colors duration-300 mb-5">
+                <div className="w-10 h-10 rounded-lg bg-sky-900 border border-sky-800 flex items-center justify-center text-white group-hover:bg-cyan-500 transition-colors duration-300 mb-5">
                   <card.icon className="w-4.5 h-4.5" strokeWidth={2} />
                 </div>
                 <p className="font-bold text-sky-900 font-mono text-xs uppercase tracking-widest mb-2">
@@ -265,7 +265,7 @@ export default function ContactPage() {
                     <>
                       <span>Send Message</span>
                       <Send
-                        className="w-3.5 h-3.5 text-cyan-400"
+                        className="w-3.5 h-3.5 text-white"
                         strokeWidth={2.5}
                       />
                     </>

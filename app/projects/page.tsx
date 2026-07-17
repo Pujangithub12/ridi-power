@@ -109,18 +109,6 @@ const allProjects = [
   },
 ];
 
-const categoryStyles: Record<string, string> = {
-  "Run-of-River": "bg-blue-500",
-  Reservoir: "bg-violet-500",
-  "Pumped Storage": "bg-amber-500",
-};
-
-const statusStyles: Record<string, string> = {
-  Operational: "bg-emerald-500 text-white",
-  "Under Construction": "bg-amber-500 text-white",
-  Planning: "bg-slate-400 text-white",
-};
-
 const heroStats = [
   {
     icon: Activity,
@@ -268,7 +256,7 @@ export default function ProjectsPage() {
                 key={project.id}
                 className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
               >
-                <div className="relative h-48 w-full bg-slate-100">
+                <div className="relative h-56 w-full bg-slate-100">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -276,30 +264,19 @@ export default function ProjectsPage() {
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                     className="object-cover group-hover:scale-105 transition-all duration-700 ease-in-out"
                   />
-                  <div className="absolute top-3 left-3 flex gap-2">
-                    <span
-                      className={`px-2.5 py-1 text-[10px] font-bold rounded-full shadow-sm ${statusStyles[project.status]}`}
-                    >
-                      {project.status}
-                    </span>
-                  </div>
-                  <div
-                    className={`absolute top-3 right-3 px-2.5 py-1 text-[10px] font-bold text-white rounded-full shadow-sm ${categoryStyles[project.category]}`}
-                  >
-                    {project.category}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="flex items-center gap-1.5 text-xs font-semibold text-white/70 mb-1.5">
+                      <MapPin className="w-3.5 h-3.5" strokeWidth={2} />
+                      <span>{project.location}</span>
+                    </div>
+                    <h3 className="text-lg font-bold tracking-tight text-white">
+                      {project.title}
+                    </h3>
                   </div>
                 </div>
 
                 <div className="p-5 flex flex-col grow">
-                  <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 mb-2">
-                    <MapPin className="w-3.5 h-3.5 text-cyan-500" strokeWidth={2} />
-                    <span>{project.location}</span>
-                  </div>
-
-                  <h3 className="text-lg font-bold tracking-tight text-slate-900 group-hover:text-cyan-600 transition-colors mb-2">
-                    {project.title}
-                  </h3>
-
                   <p className="text-sm text-slate-500 leading-relaxed mb-5">
                     {project.description}
                   </p>

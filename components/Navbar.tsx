@@ -145,16 +145,13 @@ export default function Navbar() {
                           onMouseEnter={() => setMgmtOpen(true)}
                           onMouseLeave={() => setMgmtOpen(false)}
                         >
-                          <Link
-                            href={item.href}
-                            className="flex items-center justify-between px-4 py-3 text-xs font-bold uppercase tracking-wider font-mono text-slate-600 hover:text-sky-900 hover:bg-slate-50 transition-colors"
-                          >
+                          <div className="flex items-center justify-between px-4 py-3 text-xs font-bold uppercase tracking-wider font-mono text-slate-600">
                             {item.label}
                             <ChevronRight
                               className="w-3.5 h-3.5 text-slate-400"
                               strokeWidth={2.5}
                             />
-                          </Link>
+                          </div>
 
                           {mgmtOpen && (
                             <div className="absolute top-0 left-full pl-2 w-64">
@@ -308,25 +305,17 @@ export default function Navbar() {
                   {aboutLinks.map((item) =>
                     item.children ? (
                       <div key={item.href}>
-                        <div className="flex items-center">
-                          <Link
-                            href={item.href}
-                            onClick={closeMobileMenu}
-                            className="flex-1 text-xs font-bold uppercase tracking-wider font-mono p-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-sky-900 transition-all"
-                          >
-                            {item.label}
-                          </Link>
-                          <button
-                            onClick={() => setMobileMgmtOpen(!mobileMgmtOpen)}
-                            aria-label="Toggle Management Team submenu"
-                            className="p-3 text-slate-400 hover:text-sky-900"
-                          >
-                            <ChevronDown
-                              className={`w-3.5 h-3.5 transition-transform duration-200 ${mobileMgmtOpen ? "rotate-180" : ""}`}
-                              strokeWidth={2.5}
-                            />
-                          </button>
-                        </div>
+                        <button
+                          onClick={() => setMobileMgmtOpen(!mobileMgmtOpen)}
+                          aria-label="Toggle Management Team submenu"
+                          className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider font-mono p-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-sky-900 transition-all"
+                        >
+                          {item.label}
+                          <ChevronDown
+                            className={`w-3.5 h-3.5 transition-transform duration-200 ${mobileMgmtOpen ? "rotate-180" : ""}`}
+                            strokeWidth={2.5}
+                          />
+                        </button>
                         {mobileMgmtOpen && (
                           <div className="ml-3 pl-3 border-l-2 border-slate-100 space-y-1">
                             {item.children.map((child) => (
