@@ -4,6 +4,7 @@ import {
   listFinancialDocuments,
   uploadFinancialDocument,
 } from "@/lib/r2";
+import { getSession } from "@/lib/auth";
 
 const CATEGORIES: ReadonlySet<string> = new Set(["annual", "quarterly"]);
 const MAX_FILE_SIZE = 4 * 1024 * 1024; // Vercel serverless functions cap request bodies around 4.5MB.
@@ -31,26 +32,18 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const expectedPassword = process.env.DOCS_UPLOAD_PASSWORD;
-  if (!expectedPassword) {
-    return NextResponse.json(
-      { error: "Uploads are not configured" },
-      { status: 500 }
-    );
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const formData = await request.formData();
   const category = formData.get("category");
-  const password = formData.get("password");
   const title = formData.get("title");
   const file = formData.get("file");
 
   if (!isCategory(category)) {
     return NextResponse.json({ error: "Invalid category" }, { status: 400 });
-  }
-
-  if (typeof password !== "string" || password !== expectedPassword) {
-    return NextResponse.json({ error: "Incorrect password" }, { status: 401 });
   }
 
   const trimmedTitle = typeof title === "string" ? title.trim() : "";

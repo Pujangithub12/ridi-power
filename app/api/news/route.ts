@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { addNewsItem, listNewsItems } from "@/lib/news";
+import { getSession } from "@/lib/auth";
 
 const MAX_FILE_SIZE = 4 * 1024 * 1024; // Vercel serverless functions cap request bodies around 4.5MB.
 const MAX_DESCRIPTION_LENGTH = 2000;
@@ -15,23 +16,15 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const expectedPassword = process.env.DOCS_UPLOAD_PASSWORD;
-  if (!expectedPassword) {
-    return NextResponse.json(
-      { error: "Uploads are not configured" },
-      { status: 500 }
-    );
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const formData = await request.formData();
-  const password = formData.get("password");
   const title = formData.get("title");
   const description = formData.get("description");
   const file = formData.get("file");
-
-  if (typeof password !== "string" || password !== expectedPassword) {
-    return NextResponse.json({ error: "Incorrect password" }, { status: 401 });
-  }
 
   const trimmedTitle = typeof title === "string" ? title.trim() : "";
   if (!trimmedTitle) {

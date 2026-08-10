@@ -16,12 +16,12 @@ const contactCards = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@ridihydropower.com",
+    value: "ridipower@gmail.com",
   },
   {
     icon: Phone,
     label: "Phone number",
-    value: "+1 (503) 555-0123",
+    value: "+977-01-5111015 / 5111016",
   },
   {
     icon: Clock,

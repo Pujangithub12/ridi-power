@@ -37,10 +37,12 @@ export default function FinancialDocuments({
   category,
   initialDocuments = [],
   initialError,
+  isAdmin = false,
 }: {
   category: DocumentCategory;
   initialDocuments?: FinancialDocument[];
   initialError?: string | null;
+  isAdmin?: boolean;
 }) {
   const [documents, setDocuments] = useState<FinancialDocument[]>(
     initialDocuments
@@ -52,7 +54,6 @@ export default function FinancialDocuments({
 
   const [showUpload, setShowUpload] = useState(false);
   const [title, setTitle] = useState("");
-  const [password, setPassword] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -69,7 +70,6 @@ export default function FinancialDocuments({
 
   function openUpload() {
     setTitle("");
-    setPassword("");
     setFile(null);
     setUploadError(null);
     setUploadSuccess(false);
@@ -108,7 +108,6 @@ export default function FinancialDocuments({
     const formData = new FormData();
     formData.append("category", category);
     formData.append("title", title);
-    formData.append("password", password);
     formData.append("file", file);
 
     try {
@@ -121,7 +120,6 @@ export default function FinancialDocuments({
       setUploadSuccess(true);
       setTitle("");
       setFile(null);
-      setPassword("");
       await refreshDocuments();
     } catch (err) {
       setUploadError(err instanceof Error ? err.message : "Upload failed");
@@ -179,16 +177,18 @@ export default function FinancialDocuments({
         )}
       </div>
 
-      <button
-        type="button"
-        onClick={openUpload}
-        className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-cyan-600 hover:text-cyan-700 font-mono"
-      >
-        <Lock className="w-3.5 h-3.5" strokeWidth={2} />
-        Admin upload
-      </button>
+      {isAdmin && (
+        <button
+          type="button"
+          onClick={openUpload}
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-cyan-600 hover:text-cyan-700 font-mono"
+        >
+          <Lock className="w-3.5 h-3.5" strokeWidth={2} />
+          Upload document
+        </button>
+      )}
 
-      {showUpload && (
+      {isAdmin && showUpload && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4"
           onClick={closeUpload}
@@ -214,7 +214,7 @@ export default function FinancialDocuments({
               className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 font-mono mb-6"
             >
               <Lock className="w-3.5 h-3.5" strokeWidth={2} />
-              Admin upload
+              Upload document
             </div>
 
             <form onSubmit={handleUpload} className="space-y-4">
@@ -244,20 +244,6 @@ export default function FinancialDocuments({
                     setFile(event.target.files?.[0] ?? null)
                   }
                   className="w-full px-4 py-2 rounded-lg border border-slate-200 bg-white text-sm file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:bg-sky-900 file:text-white file:text-xs file:font-bold"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1.5">
-                  Admin password
-                </label>
-                <input
-                  type="password"
-                  required
-                  autoComplete="off"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  className="w-full px-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
                 />
               </div>
 

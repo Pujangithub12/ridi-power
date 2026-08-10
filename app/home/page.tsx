@@ -13,7 +13,36 @@ import {
   Globe,
   TrendingUp,
   MapPin,
+  Calendar,
 } from "lucide-react";
+
+const companyDescription = [
+  "Ridi Power Company Limited is a prestigious institution that continues to strengthen its excellence and contribution to Nepal's energy sector. Established in 2057 BS (2000 AD), the company has played a vital role in expanding energy projects even into remote regions of the country, strengthening energy supply at both local and national levels.",
+  "Originally incorporated as Ridi Hydropower Development Company Limited, it merged with Rairang Hydropower Development Company Limited in 2079 BS to become Ridi Power Company Limited. This marked the first-ever merger between two listed hydropower companies in Nepal's history.",
+  "While initially focused on hydropower development, the company has since expanded into solar energy projects. Currently, the company operates 3 hydropower projects with a total capacity of 12.8 MW and 1 solar power project with a capacity of 8.5 MW, regularly supplying electricity to the national grid. Additionally, through its equity investment in Sajha Power Company, it is actively involved in developing the under-construction Lower Balephi Hydropower Project (22.5 MW) in Sindhupalchok district.",
+  "Ridi Power Company prioritizes not only power generation but also environmental responsibility, social prosperity for local communities, and the long-term interests of its investors. Financially, the company has increased its capital and earned steady profits in recent years, playing an active role in creating a robust investment climate in Nepal's energy sector.",
+];
+
+const companyVision =
+  "The long-term objective of Ridi Power Company is to increase Nepal's energy self-reliance, promote clean energy, and support sustainable development. In its future plans, the company aims to expand further energy projects and generate local employment to help steer Nepal toward a green and sustainable future. Driven by modern technology, high-level leadership, and a dedicated workforce, Ridi Power Company Limited continues to advance Nepal's energy sector.";
+
+const companyDates = [
+  { label: "Establishment Date", value: "2057/11/28 BS" },
+  { label: "Company Registration No.", value: "1075/064/065" },
+  { label: "Industry Registration No.", value: "264/38" },
+  { label: "PAN No.", value: "300847884" },
+  { label: "Conversion to Public Limited Company", value: "2065/04/20 BS" },
+  { label: "Power Purchase Agreement (PPA) Date", value: "2063/05/08 BS" },
+  { label: "Electricity Generation License Date", value: "2064/02/17 BS" },
+  {
+    label: "Integrated Business Operations (Post-Merger)",
+    value: "2079/03/30 BS",
+  },
+  { label: "Share Allotment to Local Residents", value: "2070/07/24 BS" },
+  { label: "Share Allotment to General Public", value: "2070/12/18 BS" },
+  { label: "First Share Listing on NEPSE", value: "2071/03/22 BS" },
+  { label: "First Trading Date on Stock Market", value: "2071/03/29 BS" },
+];
 
 const stats = [
   {
@@ -107,27 +136,6 @@ const projects = [
   },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "Ridi Hydropower has transformed our community's energy landscape. Their commitment to sustainability and local engagement is unmatched.",
-    author: "Sarah Mitchell",
-    role: "Mayor, Riverside County",
-  },
-  {
-    quote:
-      "The technical expertise and environmental stewardship demonstrated by Ridi sets a new standard for renewable energy projects.",
-    author: "Dr. James Chen",
-    role: "Environmental Scientist, EPA",
-  },
-  {
-    quote:
-      "Working with Ridi has been exceptional. Their projects deliver reliable power while preserving the natural beauty of our region.",
-    author: "Maria Santos",
-    role: "Director, Green Energy Alliance",
-  },
-];
-
 export default function HomePage() {
   return (
     <div className="mt-6 min-h-screen bg-slate-50 text-slate-800 antialiased selection:bg-cyan-500 selection:text-white">
@@ -153,7 +161,7 @@ export default function HomePage() {
               Infrastructure Systems
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-4">
               Driving Industrial Capacity <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-200 font-normal">
                 through Constant Kinetic Currents.
@@ -186,7 +194,76 @@ export default function HomePage() {
         </div>
       </section>
 
-      
+      {/* Company Description - Corporate Profile */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-4 h-[1px] bg-cyan-500" />
+                <span className="text-xs font-bold text-cyan-600 uppercase tracking-widest font-mono">
+                  Corporate Profile
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-sky-900 mb-8">
+                Ridi Power Company Limited
+              </h2>
+
+              <div className="space-y-5">
+                {companyDescription.map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="text-sm md:text-base text-slate-600 leading-relaxed"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+
+              <div className="mt-10 p-6 rounded-2xl bg-slate-50 border border-slate-200/60 shadow-lg">
+                <h3 className="text-sm font-bold text-sky-900 uppercase tracking-widest font-mono mb-3">
+                  Long-Term Vision
+                </h3>
+                <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+                  {companyVision}
+                </p>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="flex items-center gap-2 mb-3">
+                <Calendar className="w-4 h-4 text-cyan-600" strokeWidth={2} />
+                <span className="text-xs font-bold text-cyan-600 uppercase tracking-widest font-mono">
+                  Key Company Information & Dates
+                </span>
+              </div>
+              <div className="rounded-2xl border border-slate-200/60 overflow-hidden">
+                <dl className="divide-y divide-slate-100">
+                  {companyDates.map((item) => (
+                    <div
+                      key={item.label}
+                      className="flex items-center justify-between gap-4 px-5 py-4 bg-white hover:bg-slate-50 transition-colors"
+                    >
+                      <dt className="text-sm text-slate-500 font-medium">
+                        {item.label}
+                      </dt>
+                      <dd className="text-sm font-bold text-sky-900 font-mono text-right shrink-0">
+                        {item.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+              <p className="text-sm text-slate-400 leading-relaxed mt-6">
+                With its long-term vision, standards, and commitment to
+                social responsibility, the company will remain a strong
+                pillar of Nepal&rsquo;s energy sector in the coming decade.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section - Dotted Grid Technical Matrix */}
       <section className="py-24 relative overflow-hidden bg-white mt-4">
@@ -212,7 +289,7 @@ export default function HomePage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="p-8 bg-slate-50 rounded-xl border border-slate-200/60 hover:border-cyan-500/40 hover:bg-white transition-all duration-300 flex flex-col justify-between group hover:shadow-xl hover:shadow-sky-900/5"
+                className="p-8 bg-slate-50 rounded-xl border border-slate-200/60 shadow-md hover:border-cyan-500/40 hover:bg-white hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group hover:shadow-xl hover:shadow-sky-900/10"
               >
                 <div>
                   <div
@@ -223,7 +300,7 @@ export default function HomePage() {
                   <h3 className="text-lg font-bold text-sky-900 mb-3 tracking-tight">
                     {feature.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed text-xs md:text-sm">
+                  <p className="text-slate-600 leading-relaxed text-sm md:text-base">
                     {feature.description}
                   </p>
                 </div>
@@ -247,7 +324,7 @@ export default function HomePage() {
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-sky-900">
                 Featured Power Stations
               </h2>
-              <p className="text-xs md:text-sm text-slate-600 mt-3 leading-relaxed">
+              <p className="text-sm md:text-base text-slate-600 mt-3 leading-relaxed">
                 Active commercial installations monitoring continuous kinetic
                 matrix performance outputs.
               </p>
@@ -265,7 +342,7 @@ export default function HomePage() {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="group rounded-xl border border-slate-200/80 overflow-hidden bg-white hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-sky-900/5 transition-all duration-300"
+                className="group rounded-xl border border-slate-200/80 overflow-hidden bg-white shadow-lg hover:border-cyan-500/40 hover:shadow-2xl hover:-translate-y-1 hover:shadow-sky-900/10 transition-all duration-300"
               >
                 <div className="relative h-56 overflow-hidden bg-slate-200">
                   <Image
@@ -305,55 +382,6 @@ export default function HomePage() {
                       Details{" "}
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                     </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stakeholder Endorsements - Premium Structured Layout */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center mb-20">
-            <span className="text-xs font-bold uppercase tracking-widest text-cyan-600 font-mono block mb-3">
-              Stakeholder Endorsements
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-sky-900">
-              What Our Partners Say
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="p-8 bg-slate-50 rounded-xl border border-slate-200/60 flex flex-col justify-between hover:border-cyan-500/40 hover:bg-white hover:shadow-xl hover:shadow-sky-900/5 transition-all duration-300"
-              >
-                <div>
-                  <span className="text-4xl text-cyan-500/30 font-serif leading-none block mb-2">
-                    “
-                  </span>
-                  <p className="text-slate-600 mb-8 leading-relaxed text-xs md:text-sm font-normal">
-                    {testimonial.quote}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-3.5 pt-5 border-t border-slate-200/60">
-                  <div className="w-9 h-9 rounded-lg bg-sky-900 flex items-center justify-center text-cyan-400 font-bold font-mono text-xs tracking-wider border border-sky-800">
-                    {testimonial.author
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </div>
-                  <div>
-                    <div className="font-bold text-sky-900 text-xs md:text-sm tracking-tight">
-                      {testimonial.author}
-                    </div>
-                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5 font-mono">
-                      {testimonial.role}
-                    </div>
                   </div>
                 </div>
               </div>

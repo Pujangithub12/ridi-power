@@ -1,28 +1,35 @@
+import Image from "next/image";
+
 const boardMembers = [
   {
     name: "Kuber Mani Nepal",
-    role: "Chairman",
+    role: "Chief Executive Officer",
     initials: "KMN",
+    image: "/board%20of%20directors/Kuber-Mani-Nepal.jpg",
   },
   {
-    name: "Kadam Mani Nepal",
-    role: "Director",
-    initials: "KN",
+    name: "Santosh Adhikari",
+    role: "Head Director",
+    initials: "SA",
+    image: "/board%20of%20directors/santosh.jpg",
   },
   {
-    name: "Ramesh Bhattarai",
+    name: "Ramesh Neupane",
     role: "Director",
-    initials: "RB",
+    initials: "RN",
+    image: "/board%20of%20directors/ramesh.jpg",
   },
   {
-    name: "Sunita Gurung",
+    name: "Saika Bhandari",
     role: "Director",
-    initials: "SG",
+    initials: "SB",
+    image: "/board%20of%20directors/saika.jpg",
   },
   {
-    name: "Kishor Neupane",
-    role: "Director",
-    initials: "KN",
+    name: "Dibya Koirala",
+    role: "Independent Director",
+    initials: "DK",
+    image: "/board%20of%20directors/dibya.jpg",
   },
 ];
 
@@ -49,18 +56,50 @@ export default function BoardOfDirectorsPage() {
       {/* Board Grid */}
       <section className="pt-16 pb-16 bg-white border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-4">
-  
+          {/* CEO - Featured */}
+          <div className="mb-10 flex justify-center">
+            <div className="bg-white border border-slate-200/70 rounded-xl p-10 text-center shadow-lg hover:shadow-xl hover:border-sky-900/20 transition-all duration-300 max-w-xs w-full">
+              <div className="relative w-32 h-32 mx-auto rounded-full bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center text-sky-900 text-lg font-bold tracking-tight">
+                {boardMembers[0].image ? (
+                  <Image
+                    src={boardMembers[0].image}
+                    alt={boardMembers[0].name}
+                    fill
+                    sizes="128px"
+                    className="object-cover"
+                  />
+                ) : (
+                  boardMembers[0].initials
+                )}
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 tracking-tight mt-6">
+                {boardMembers[0].name}
+              </h3>
+              <p className="text-[11px] font-bold text-cyan-600 uppercase tracking-widest mt-1">
+                {boardMembers[0].role}
+              </p>
+            </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {boardMembers.map((person, index) => (
+          {/* Remaining Directors */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {boardMembers.slice(1).map((person, index) => (
               <div
                 key={index}
-                className="bg-white border border-slate-200/70 rounded-xl p-8 text-center hover:border-sky-900/20 hover:shadow-lg hover:shadow-sky-900/5 transition-all duration-300"
+                className="bg-white border border-slate-200/70 rounded-xl p-8 text-center shadow-md hover:shadow-lg hover:border-sky-900/20 transition-all duration-300"
               >
-                <div className="w-18 h-18 mx-auto rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-sky-900 text-lg font-bold tracking-tight">
-                  {person.initials}
+                <div className="relative w-24 h-24 mx-auto rounded-full bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center text-sky-900 text-lg font-bold tracking-tight">
+                  {person.image ? (
+                    <Image
+                      src={person.image}
+                      alt={person.name}
+                      fill
+                      sizes="96px"
+                      className="object-cover"
+                    />
+                  ) : (
+                    person.initials
+                  )}
                 </div>
                 <h3 className="text-base font-bold text-slate-900 tracking-tight mt-5">
                   {person.name}
@@ -73,7 +112,7 @@ export default function BoardOfDirectorsPage() {
           </div>
         </div>
       </section>
-      
+
     </div>
   );
 }

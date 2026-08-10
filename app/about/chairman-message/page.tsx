@@ -37,7 +37,7 @@ export default function ChairmanMessagePage() {
               <div className="rounded-2xl overflow-hidden border border-slate-200/60 shadow-xl shadow-sky-900/5 bg-slate-50">
                 <div className="relative w-full aspect-[4/5]">
                   <Image
-                    src="/Kuber-Mani-Nepal.jpg"
+                    src="/board%20of%20directors/Kuber-Mani-Nepal.jpg"
                     alt="Kuber Mani Nepal, Chairman of Ridi Power Company Limited"
                     fill
                     sizes="(min-width: 1024px) 33vw, 100vw"
@@ -57,7 +57,7 @@ export default function ChairmanMessagePage() {
 
             {/* Letter */}
             <div className="lg:col-span-8">
-              <span className="text-4xl text-cyan-500/30 font-serif leading-none block mb-4">
+              <span className="text-4xl text-cyan-500/30 leading-none block mb-4">
                 &ldquo;
               </span>
               <div className="space-y-6">
