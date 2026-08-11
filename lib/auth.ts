@@ -4,7 +4,7 @@ import { SignJWT, jwtVerify } from "jose";
 import bcrypt from "bcryptjs";
 
 const SESSION_COOKIE = "ridi_session";
-const SESSION_DURATION_SECONDS = 60 * 60 * 12; // 12 hours
+const SESSION_DURATION_SECONDS = 60 * 60; // 1 hour
 
 // A real bcrypt hash of an unused value. Comparing against this when the
 // supplied email doesn't match keeps login response time constant, so a
