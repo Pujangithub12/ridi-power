@@ -40,7 +40,7 @@ const allProjects = [
     year: "2076 B.S.",
     description:
       "Ridi Power Company completed this 9,900 kW hydropower project on the Iwa River, in commercial operation since Ashwin 20, 2076 B.S. In F.Y. 2081/82, the project generated 36,354,349 kWh against a target of 56,624,954 kWh, earning a total revenue of Rs. 218,422,737.",
-    image: "/iwa-khola-hydro-project.jpg",
+    image: "/iwa-khola/IMG-20221229-WA0004.jpg",
     stats: {
       generation: "36.35M kWh",
       target: "64.2%",
@@ -76,7 +76,8 @@ const allProjects = [
     year: "2077 B.S.",
     description:
       "Ridi Power Company Limited constructed this 8,500 kW grid-connected solar project in Tilottama Municipality, Rupandehi, in commercial operation since Kartik 20, 2077 B.S. Power is sold to NEA at a fixed rate of Rs. 7.30 per unit under a 25-year PPA. In F.Y. 2081/82, the project generated 13,176,690 kWh against a target of 14,510,613 kWh, earning a total revenue of Rs. 94,526,875.",
-    image: "/butwal-solar.jpg",
+    image:
+      "/butwal-solar/107931855_2649846508598469_5449660091921747925_n.png",
     stats: {
       generation: "13.18M kWh",
       rate: "Rs. 7.30/unit",
@@ -130,20 +131,6 @@ export default function ProjectsPage() {
         </p>
       </section>
 
-      {/* Hero Image */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-8">
-        <div className="relative w-full h-[32vh] min-h-[240px] bg-slate-200 rounded-3xl overflow-hidden shadow-lg">
-          <Image
-            src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&h=800&fit=crop"
-            alt="Hydropower landscape"
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-          />
-        </div>
-      </section>
-
       {/* KPI Stat Cards */}
       <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -179,7 +166,7 @@ export default function ProjectsPage() {
                 key={project.id}
                 className="group h-full flex flex-col bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="relative h-56 w-full bg-slate-100">
+                <div className="relative h-56 w-full bg-slate-100 overflow-hidden">
                   <Image
                     src={project.image}
                     alt={project.title}

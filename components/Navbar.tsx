@@ -165,9 +165,9 @@ export default function Navbar({
               onMouseEnter={() => setAboutOpen(true)}
               onMouseLeave={() => setAboutOpen(false)}
             >
-              <Link
-                href="/about"
-                className={`flex items-center gap-1 text-sm font-bold uppercase tracking-widest font-mono transition-all duration-200 relative py-2 ${
+              <button
+                type="button"
+                className={`flex items-center gap-1 text-sm font-bold uppercase tracking-widest font-mono transition-all duration-200 relative py-2 focus:outline-none ${
                   isAboutActive
                     ? "text-cyan-600 font-extrabold"
                     : "text-slate-500 hover:text-sky-900"
@@ -181,7 +181,7 @@ export default function Navbar({
                 {isAboutActive && (
                   <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-cyan-500 rounded-full" />
                 )}
-              </Link>
+              </button>
 
               {aboutOpen && (
                 <div className="absolute top-full left-0 pt-3 w-64">

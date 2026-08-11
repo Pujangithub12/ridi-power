@@ -1,17 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { Droplets, Battery, Waves, Cog } from "lucide-react";
+import { Sun, Battery, Waves, Cog } from "lucide-react";
 
 const technologies = [
   {
-    icon: Droplets,
-    title: "Kaplan Turbines",
+    icon: Sun,
+    title: "Solar PV",
     imageSrc:
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&h=500&fit=crop",
+      "/butwal-solar/109101731_737599080391580_4802212191086660742_n.jpg",
     description:
-      "Variable-pitch blade turbines optimized for low-head, high-flow conditions. Our custom designs achieve engineered efficiency benchmarks. The runner blades pivot automatically in response to real-time discharge variation, sustaining peak efficiency across a wide operating range rather than a single fixed point. This adaptability makes Kaplan units the preferred choice for run-of-river sites with seasonal flow swings, where rigid-blade alternatives would sacrifice output during low-flow months.",
-    specs: ["Efficiency: 94%", "Head Range: 2-40m", "Capacity: 5-200 MW"],
+      "Grid-connected photovoltaic arrays that convert sunlight directly into electricity, complementing our hydropower generation with a diversified renewable portfolio. Panels are laid out and inclined to maximize year-round solar capture at each site, with inverter systems tuned for stable, synchronized grid injection. This flexibility lets us bring capacity online in regions with strong solar irradiance, independent of river flow or seasonal hydrology.",
+    specs: ["Efficiency: 21%", "Panel Life: 25+ yrs", "Capacity: 1-50 MW"],
     gradient: "from-sky-500 to-cyan-500",
   },
   {
@@ -48,7 +48,7 @@ const technologies = [
 
 export default function TechnologyPage() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 pt-20">
+    <div className="min-h-screen bg-white text-slate-900 pt-20">
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-6 lg:px-8 pt-12 pb-8">
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-100 text-cyan-700 text-xs font-bold mb-4">
@@ -65,7 +65,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* Turbine Systems */}
-      <section className="py-16 bg-white">
+      <section className="pt-16 pb-6 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="divide-y divide-slate-100 border-t border-b border-slate-100">
             {technologies.map((tech, index) => (

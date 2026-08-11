@@ -4,6 +4,31 @@ import { useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 
+const butwalSolarFiles = [
+  "107931855_2649846508598469_5449660091921747925_n.png",
+  "107958442_953506185097713_1621334342353400482_n.jpg",
+  "108205147_384429265863698_8751497393389280031_n.jpg",
+  "109101731_737599080391580_4802212191086660742_n.jpg",
+  "109243318_289371885644649_2041926808747398399_n (1).jpg",
+  "109293144_310219186794300_3850383685001165105_n.jpg",
+  "109323065_281912126451630_3121751415325012730_n.jpg",
+  "109532143_282062576435613_2541823170747867144_n.jpg",
+  "83083760_486083888993877_1895281089614708736_n.jpg",
+  "83944487_200084757711503_3280229543733886976_n.jpg",
+  "84272581_121614335793685_4524024202612703232_n.jpg",
+  "IMG20190903170409.jpg",
+  "IMG_20201029_134157.jpg",
+  "IMG_20201029_171803.jpg",
+  "IMG_20201029_171822.jpg",
+  "IMG_20201029_172253.jpg",
+  "IMG_20201029_172439.jpg",
+];
+
+const iwaKholaFiles = [
+  "IMG-20221229-WA0001.jpg",
+  "IMG-20221229-WA0004.jpg",
+];
+
 const galleryImages = [
   {
     src: "/ridi-photo.jpg",
@@ -55,6 +80,11 @@ const galleryImages = [
     alt: "Iwa Khola penstock construction",
     category: "Iwa Khola",
   },
+  ...iwaKholaFiles.map((file) => ({
+    src: `/iwa-khola/${encodeURIComponent(file)}`,
+    alt: "Iwa Khola Hydropower Project",
+    category: "Iwa Khola",
+  })),
   {
     src: "/rairang-khola.jpg",
     alt: "Rairang Khola Hydropower Project",
@@ -65,21 +95,11 @@ const galleryImages = [
     alt: "Rairang Khola Hydropower Project",
     category: "Rairang Khola",
   },
-  {
-    src: "/butwal-solar.jpg",
+  ...butwalSolarFiles.map((file) => ({
+    src: `/butwal-solar/${encodeURIComponent(file)}`,
     alt: "Butwal Solar Project",
     category: "Butwal Solar",
-  },
-  {
-    src: "/butwal-solar-construction.jpg",
-    alt: "Butwal Solar under construction",
-    category: "Butwal Solar",
-  },
-  {
-    src: "/butwal-solar-construction2.jpg",
-    alt: "Butwal Solar under construction",
-    category: "Butwal Solar",
-  },
+  })),
   {
     src: "/construction.jpg",
     alt: "Project site construction",
@@ -116,35 +136,14 @@ const galleryImages = [
     category: "Construction",
   },
   {
-    src: "/construction8.jpg",
-    alt: "Project site construction",
-    category: "Construction",
-  },
-  {
-    src: "/construction9.jpg",
-    alt: "Project site construction",
-    category: "Construction",
-  },
-  {
     src: "/construction10.jpg",
     alt: "Project site construction",
     category: "Construction",
   },
 ];
 
-const categories = [
-  "All",
-  ...Array.from(new Set(galleryImages.map((img) => img.category))),
-];
-
 export default function GalleryPage() {
-  const [activeCategory, setActiveCategory] = useState("All");
   const [selected, setSelected] = useState<number | null>(null);
-
-  const filtered =
-    activeCategory === "All"
-      ? galleryImages
-      : galleryImages.filter((img) => img.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pt-20">
@@ -162,30 +161,11 @@ export default function GalleryPage() {
         </p>
       </section>
 
-      {/* Filters */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-8 pb-8">
-        <div className="flex flex-wrap gap-2">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 ${
-                activeCategory === cat
-                  ? "bg-sky-900 text-white shadow-md"
-                  : "bg-white text-slate-500 hover:bg-slate-100"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </section>
-
       {/* Grid */}
       <section className="pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 [column-fill:_balance]">
-            {filtered.map((img, index) => (
+            {galleryImages.map((img, index) => (
               <button
                 key={img.src + index}
                 onClick={() => setSelected(index)}
@@ -228,8 +208,8 @@ export default function GalleryPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={filtered[selected].src}
-              alt={filtered[selected].alt}
+              src={galleryImages[selected].src}
+              alt={galleryImages[selected].alt}
               fill
               sizes="100vw"
               className="object-contain"

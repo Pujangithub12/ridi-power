@@ -9,7 +9,7 @@ const boardMembers = [
   },
   {
     name: "Santosh Adhikari",
-    role: "Head Director",
+    role: "Chief Director",
     initials: "SA",
     image: "/board%20of%20directors/santosh.jpg",
   },

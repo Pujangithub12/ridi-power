@@ -12,7 +12,6 @@ import {
   Shield,
   Globe,
   TrendingUp,
-  MapPin,
   Calendar,
 } from "lucide-react";
 
@@ -28,9 +27,6 @@ const companyVision =
 
 const companyDates = [
   { label: "Establishment Date", value: "2057/11/28 BS" },
-  { label: "Company Registration No.", value: "1075/064/065" },
-  { label: "Industry Registration No.", value: "264/38" },
-  { label: "PAN No.", value: "300847884" },
   { label: "Conversion to Public Limited Company", value: "2065/04/20 BS" },
   { label: "Power Purchase Agreement (PPA) Date", value: "2063/05/08 BS" },
   { label: "Electricity Generation License Date", value: "2064/02/17 BS" },
@@ -106,33 +102,39 @@ const features = [
   },
 ];
 
-const projects = [
+const heroSlides = [
   {
-    title: "Blue River Dam",
-    location: "Hetauda, Nepal",
-    capacity: "450 MW",
-    status: "Operational",
-    statusColor: "bg-sky-900 text-cyan-400 border border-sky-800",
-    image:
-      "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&h=500&fit=crop",
+    src: "/butwal-solar/83083760_486083888993877_1895281089614708736_n.jpg",
+    alt: "Butwal Solar Project",
   },
   {
-    title: "Cascade Falls",
-    location: "Jhapa, Nepal",
-    capacity: "320 MW",
-    status: "Operational",
-    statusColor: "bg-sky-900 text-cyan-400 border border-sky-800",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop",
+    src: "/butwal-solar/109243318_289371885644649_2041926808747398399_n%20(1).jpg",
+    alt: "Butwal Solar Project",
+  },
+  { src: "/iwa-khola/IMG-20221229-WA0004.jpg", alt: "Iwa Khola Hydropower Project" },
+  { src: "/construction5.jpg", alt: "Project site construction" },
+  { src: "/ridi-photo2.jpg", alt: "Ridi Hydropower" },
+];
+
+const galleryPreviewImages = [
+  { src: "/ridi-photo.jpg", alt: "Ridi Hydropower" },
+  { src: "/ridi-khola-hydro.jpg", alt: "Ridi Khola Hydropower Project" },
+  { src: "/ridi-khola-hydro2.jpg", alt: "Ridi Khola Hydropower Project" },
+  { src: "/iwa-khola-hydro-project.jpg", alt: "Iwa Khola Hydropower Project" },
+  {
+    src: "/iwa-khola-hydro-powerhouse.jpg",
+    alt: "Iwa Khola powerhouse",
+  },
+  { src: "/iwa-khola/IMG-20221229-WA0001.jpg", alt: "Iwa Khola Hydropower Project" },
+  { src: "/rairang-khola.jpg", alt: "Rairang Khola Hydropower Project" },
+  { src: "/rairang-khola2.jpg", alt: "Rairang Khola Hydropower Project" },
+  {
+    src: "/butwal-solar/107931855_2649846508598469_5449660091921747925_n.png",
+    alt: "Butwal Solar Project",
   },
   {
-    title: "Emerald Valley",
-    location: "Bhojpur, Nepal",
-    capacity: "280 MW",
-    status: "Under Construction",
-    statusColor: "bg-slate-100 text-slate-700 border border-slate-200",
-    image:
-      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=500&fit=crop",
+    src: "/butwal-solar/IMG_20201029_134157.jpg",
+    alt: "Butwal Solar Project",
   },
 ];
 
@@ -140,55 +142,83 @@ export default function HomePage() {
   return (
     <div className="mt-6 min-h-screen bg-slate-50 text-slate-800 antialiased selection:bg-cyan-500 selection:text-white">
       {/* Hero Section - Deep Immersive Gradient Screen */}
-      <section className="relative h-[92vh] min-h-[650px] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1920&h=1080&fit=crop"
-            alt="Industrial hydropower turbine installation asset"
-            fill
-            className="object-cover object-center contrast-[1.05] brightness-95"
-            priority
-          />
-          {/* Dynamic Eco-Industrial Blend Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-sky-900 via-sky-900/85 to-sky-900/40 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-sky-900 via-transparent to-transparent opacity-80" />
-        </div>
+      <section className="relative min-h-[650px] flex items-center overflow-hidden bg-gradient-to-br from-sky-900 via-sky-900 to-slate-900">
+        <div className="absolute inset-0 bg-[radial-gradient(#0e1e38_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full z-10 pt-12">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-400/30 text-white text-xs font-bold uppercase tracking-widest font-mono mb-8 backdrop-blur-sm">
-              <Zap className="w-3.5 h-3.5 animate-pulse" />
-              Infrastructure Systems
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full z-10 py-16">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-400/30 text-white text-xs font-bold uppercase tracking-widest font-mono mb-8 backdrop-blur-sm">
+                <Zap className="w-3.5 h-3.5 animate-pulse" />
+                Infrastructure Systems
+              </div>
+
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-4">
+                Driving Industrial Capacity <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-200 font-normal">
+                  through Constant Kinetic Currents.
+                </span>
+              </h1>
+
+              <p className="text-base md:text-lg text-slate-300 mb-8 leading-relaxed max-w-2xl font-light">
+                Ridi Hydropower engineers continuous baseload energy arrays,
+                combining advanced hydraulic flow architecture with stable
+                grid integration topologies.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center gap-2 px-6 py-4 bg-cyan-500 hover:bg-cyan-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-cyan-500/20 group hover:-translate-y-0.5 duration-200"
+                >
+                  Explore Our Projects
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  href="/about/chairman-message"
+                  className="inline-flex items-center gap-2.5 px-6 py-4 bg-sky-900/40 backdrop-blur-md text-white font-bold rounded-xl border border-slate-700 hover:bg-sky-900/80 hover:border-cyan-500/40 transition-all duration-200"
+                >
+                  Learn More
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-4">
-              Driving Industrial Capacity <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-200 font-normal">
-                through Constant Kinetic Currents.
-              </span>
-            </h1>
-
-            <p className="text-base md:text-lg text-slate-300 mb-8 leading-relaxed max-w-2xl font-light">
-              Ridi Hydropower engineers continuous baseload energy arrays,
-              combining advanced hydraulic flow architecture with stable grid
-              integration topologies.
-            </p>
-
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-4 bg-cyan-500 hover:bg-cyan-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-cyan-500/20 group hover:-translate-y-0.5 duration-200"
-              >
-                Explore Our Projects
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2.5 px-6 py-4 bg-sky-900/40 backdrop-blur-md text-white font-bold rounded-xl border border-slate-700 hover:bg-sky-900/80 hover:border-cyan-500/40 transition-all duration-200"
-              >
-                Learn More
-                <ChevronRight className="w-4 h-4" />
-              </Link>
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="relative col-span-2 h-48 rounded-md overflow-hidden shadow-xl">
+                  <Image
+                    src={heroSlides[0].src}
+                    alt={heroSlides[0].alt}
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                {heroSlides.slice(1).map((slide, index, arr) => {
+                  const isLastOdd =
+                    arr.length % 2 === 1 && index === arr.length - 1;
+                  return (
+                    <div
+                      key={slide.src}
+                      className={`relative h-32 rounded-md overflow-hidden shadow-xl ${isLastOdd ? "col-span-2" : ""}`}
+                    >
+                      <Image
+                        src={slide.src}
+                        alt={slide.alt}
+                        fill
+                        sizes={
+                          isLastOdd
+                            ? "(min-width: 1024px) 40vw, 100vw"
+                            : "(min-width: 1024px) 20vw, 50vw"
+                        }
+                        className="object-cover"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -310,80 +340,48 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Projects - Editorial Card Pipeline */}
+      {/* Gallery Preview */}
       <section className="py-24 bg-slate-50 border-y border-slate-200/70">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-20 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
             <div className="max-w-xl">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-4 h-[1px] bg-cyan-500" />
                 <span className="text-xs font-bold uppercase tracking-widest text-cyan-600 font-mono">
-                  Production Registry
+                  Visual Archive
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-sky-900">
-                Featured Power Stations
+                Gallery
               </h2>
               <p className="text-sm md:text-base text-slate-600 mt-3 leading-relaxed">
-                Active commercial installations monitoring continuous kinetic
-                matrix performance outputs.
+                A visual record of our hydropower and solar projects, from
+                early construction to full operational commissioning.
               </p>
             </div>
             <Link
-              href="/projects"
+              href="/gallery"
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-sky-900 hover:text-cyan-600 transition-colors border-b-2 border-sky-900 hover:border-cyan-500 pb-1.5 self-start md:self-auto font-mono"
             >
-              View All Projects
+              View Full Gallery
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+          <div className="columns-2 sm:columns-3 lg:columns-5 gap-4 [column-fill:_balance]">
+            {galleryPreviewImages.map((img, index) => (
               <div
-                key={index}
-                className="group rounded-xl border border-slate-200/80 overflow-hidden bg-white shadow-lg hover:border-cyan-500/40 hover:shadow-2xl hover:-translate-y-1 hover:shadow-sky-900/10 transition-all duration-300"
+                key={img.src + index}
+                className="group relative w-full mb-4 rounded-md overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 break-inside-avoid"
               >
-                <div className="relative h-56 overflow-hidden bg-slate-200">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-sky-900/20 to-transparent" />
-                  <div
-                    className={`absolute top-4 right-4 px-3 py-1 text-[10px] font-bold uppercase tracking-widest backdrop-blur-md rounded-md ${project.statusColor}`}
-                  >
-                    {project.status}
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <div className="flex items-center gap-1 text-[11px] font-bold text-cyan-600 mb-2.5 uppercase tracking-wider font-mono">
-                    <MapPin
-                      className="w-3.5 h-3.5 text-slate-400"
-                      strokeWidth={2}
-                    />
-                    {project.location}
-                  </div>
-                  <h3 className="text-xl font-bold text-sky-900 mb-4 tracking-tight group-hover:text-cyan-600 transition-colors">
-                    {project.title}
-                  </h3>
-
-                  <div className="flex items-center justify-between border-t border-slate-100 pt-5 mt-5">
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest font-mono">
-                      {project.capacity} Capacity
-                    </span>
-                    <Link
-                      href="/projects"
-                      className="inline-flex items-center gap-1 text-xs font-bold text-sky-900 group-hover:text-cyan-600 transition-colors font-mono"
-                    >
-                      Details{" "}
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </div>
-                </div>
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={500}
+                  height={375}
+                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                />
               </div>
             ))}
           </div>
@@ -413,13 +411,6 @@ export default function HomePage() {
                   className="inline-flex items-center gap-2 px-6 py-4 bg-cyan-500 text-white font-bold rounded-xl hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/10 hover:-translate-y-0.5 duration-200"
                 >
                   Start a Conversation
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/careers"
-                  className="inline-flex items-center gap-2 px-6 py-4 bg-sky-800/40 backdrop-blur-sm text-white font-bold rounded-xl border border-sky-700 hover:bg-sky-800 hover:border-cyan-500/30 transition-all duration-200"
-                >
-                  Join Our Team
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
