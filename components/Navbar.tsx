@@ -32,9 +32,19 @@ const disclosureLinks = [
   { href: "/disclosure/news-and-notice", label: "News & Notice" },
 ];
 
+const subsidiariesLinks = [
+  {
+    href: "https://www.sajhapower.com.np/",
+    label: "Sajha Power Company Limited",
+  },
+  {
+    href: "/subsidiaries/agrovision",
+    label: "Agrovision Farming and Research Center",
+  },
+];
+
 const navLinks = [
   { href: "/projects", label: "Projects" },
-  { href: "/technology", label: "Technology" },
   { href: "/gallery", label: "Gallery" },
 ];
 
@@ -46,12 +56,15 @@ export default function Navbar({
   const [isOpen, setIsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [disclosureOpen, setDisclosureOpen] = useState(false);
+  const [subsidiariesOpen, setSubsidiariesOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileDisclosureOpen, setMobileDisclosureOpen] = useState(false);
+  const [mobileSubsidiariesOpen, setMobileSubsidiariesOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const isAboutActive = pathname === "/about" || pathname.startsWith("/about/");
   const isDisclosureActive = pathname.startsWith("/disclosure/");
+  const isSubsidiariesActive = pathname.startsWith("/subsidiaries/");
 
   const [authed, setAuthed] = useState(isAuthenticated);
   const [prevIsAuthenticated, setPrevIsAuthenticated] = useState(isAuthenticated);
@@ -79,6 +92,7 @@ export default function Navbar({
     setIsOpen(false);
     setMobileAboutOpen(false);
     setMobileDisclosureOpen(false);
+    setMobileSubsidiariesOpen(false);
   };
 
   function openLoginModal() {
@@ -125,26 +139,33 @@ export default function Navbar({
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200/60 transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200/60 transition-all duration-300 [--font-mono:var(--font-roboto)] [--font-sans:var(--font-roboto)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo - Tech & Fluid Hybrid */}
+          {/* Logo - Left */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <Image
-              src="/ridi-logo.png"
-              alt="Ridi Hydropower"
-              width={52}
-              height={52}
-              className="w-13 h-13 object-contain"
-              priority
-            />
-            <span className="text-xl font-black tracking-tight text-sky-900 font-mono uppercase">
-              Ridi<span className="text-cyan-500 font-medium"> Power</span>
+            <div className="relative w-16 h-16 overflow-hidden shrink-0">
+              <Image
+                src="/ridi-logo.png"
+                alt="Ridi Hydropower"
+                fill
+                sizes="64px"
+                className="object-contain scale-125"
+                priority
+              />
+            </div>
+            <span className="flex flex-col leading-none">
+              <span className="text-xl font-black tracking-tight text-sky-900 font-mono uppercase">
+                Ridi<span className="text-cyan-500 font-medium"> Power</span>
+              </span>
+              <span className="text-[10px] font-bold tracking-widest text-slate-500 font-mono uppercase mt-1">
+                Company Limited
+              </span>
             </span>
           </Link>
 
-          {/* Desktop Navigation - Clean Monospace Typographic Matrix */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-7">
             <Link
               href="/"
               className={`text-sm font-bold uppercase tracking-widest font-mono transition-all duration-200 relative py-2 block ${
@@ -190,6 +211,49 @@ export default function Navbar({
                       <Link
                         key={item.href}
                         href={item.href}
+                        className="block px-4 py-3 text-sm font-bold uppercase tracking-wider font-mono text-slate-600 hover:text-sky-900 hover:bg-slate-50 transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Subsidiaries Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setSubsidiariesOpen(true)}
+              onMouseLeave={() => setSubsidiariesOpen(false)}
+            >
+              <button
+                type="button"
+                className={`flex items-center gap-1 text-sm font-bold uppercase tracking-widest font-mono transition-all duration-200 relative py-2 focus:outline-none ${
+                  isSubsidiariesActive
+                    ? "text-cyan-600 font-extrabold"
+                    : "text-slate-500 hover:text-sky-900"
+                }`}
+              >
+                Subsidiaries
+                <ChevronDown
+                  className={`w-3 h-3 transition-transform duration-200 ${subsidiariesOpen ? "rotate-180" : ""}`}
+                  strokeWidth={2.5}
+                />
+                {isSubsidiariesActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-cyan-500 rounded-full" />
+                )}
+              </button>
+
+              {subsidiariesOpen && (
+                <div className="absolute top-full left-0 pt-3 w-72">
+                  <div className="bg-white border border-slate-200 rounded-xl shadow-xl shadow-sky-900/10 py-2">
+                    {subsidiariesLinks.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        target={item.href.startsWith("http") ? "_blank" : undefined}
+                        rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                         className="block px-4 py-3 text-sm font-bold uppercase tracking-wider font-mono text-slate-600 hover:text-sky-900 hover:bg-slate-50 transition-colors"
                       >
                         {item.label}
@@ -375,6 +439,43 @@ export default function Navbar({
                       key={item.href}
                       href={item.href}
                       onClick={closeMobileMenu}
+                      className="block text-sm font-bold uppercase tracking-wider font-mono p-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-sky-900 transition-all"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Subsidiaries Accordion */}
+            <div>
+              <button
+                onClick={() =>
+                  setMobileSubsidiariesOpen(!mobileSubsidiariesOpen)
+                }
+                className={`w-full flex items-center justify-between text-sm font-bold uppercase tracking-wider font-mono p-3 rounded-lg transition-all ${
+                  isSubsidiariesActive
+                    ? "bg-cyan-500/10 text-cyan-600"
+                    : "text-slate-600 hover:bg-slate-50 hover:text-sky-900"
+                }`}
+              >
+                Subsidiaries
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${mobileSubsidiariesOpen ? "rotate-180" : ""}`}
+                  strokeWidth={2.5}
+                />
+              </button>
+
+              {mobileSubsidiariesOpen && (
+                <div className="mt-1 ml-3 pl-3 border-l-2 border-slate-100 space-y-1">
+                  {subsidiariesLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeMobileMenu}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="block text-sm font-bold uppercase tracking-wider font-mono p-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-sky-900 transition-all"
                     >
                       {item.label}

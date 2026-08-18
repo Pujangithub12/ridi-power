@@ -10,7 +10,6 @@ const companyLinks = [
 ];
 
 const resourceLinks = [
-  { label: "Technology", href: "/technology" },
   {
     label: "Disclosure",
     href: "/disclosure/annual-financial-statements",
@@ -36,7 +35,7 @@ export default function Footer() {
                 />
               </div>
               <span className="text-xl font-black tracking-tight text-white">
-                Ridi<span className="text-cyan-400 font-medium"> Power Company Limited</span>
+                Ridi<span className="text-white font-medium"> Power Company Limited</span>
               </span>
             </Link>
             <p className="text-sm leading-relaxed text-white max-w-xs">
